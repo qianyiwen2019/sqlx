@@ -101,6 +101,14 @@ where
         self.persistent = value;
         self
     }
+
+    /// By set arguments = None, the sql will be sent to mysql server directly
+    /// without prepare.
+    /// This is used by StarRocks which does not support prepare.
+    pub fn disable_arguments(mut self) -> Self {
+        self.arguments = None;
+        self
+    }
 }
 
 impl<'q, DB, A: Send> Query<'q, DB, A>
